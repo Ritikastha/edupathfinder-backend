@@ -80,12 +80,12 @@ const loginUser = async (req, res) => {
         }
 
         // Generate JWT token
-        const token = jwt.sign({
+        const tokenPayload= {
             id: user._id,
             fullName: user.fullName,
             isAdmin: user.isAdmin // Assuming your User schema has an isAdmin field
-        }, process.env.JWT_TOKEN_SECRET, { expiresIn: '1h' });
-
+        };
+        const token = jwt.sign(tokenPayload, process.env.JWT_TOKEN_SECRET, { expiresIn: '1h' });
         if(user.isAdmin){
             res.status(200).json({
                 success:true,

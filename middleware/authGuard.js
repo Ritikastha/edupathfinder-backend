@@ -1,36 +1,28 @@
 const jwt = require('jsonwebtoken');
 
 const authGuard = (req, res, next) => {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) {
-        return res.json({
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).json({
             success: false,
             message: "Authorization header not found!"
         });
     }
 
-    const token = authHeader.split(' ')[1];
-    if (!token) {
-        return res.json({
-            success: false,
-            message: "Token not found!"
-        });
-    }
-
-    try {
-        const decodedUser = jwt.verify(token, process.env.JWT_TOKEN_SECRET);
-        // req.userId = user._id;
-        req.userId = decodedUser.id; 
-        req.userFullName = decodedUser.fullName; // Assuming your JWT payload contains a `fullName` field
+    jwt.verify(token, process.env.JWT_TOKEN_SECRET, (err, user) => {
+        if (err) {
+            return res.status(403).json({
+                success: false,
+                message: 'Token is invalid'
+            });
+        }
+        req.userId = user.id; // Ensure this matches your token payload
+        req.userFullName = user.fullName;
         next();
-    } catch (error) {
-        res.json({
-            success: false,
-            message: "Invalid Token"
-        });
-    }
+    });
 };
-
 
 const authGuardAdmin = (req, res, next) => {
     const authHeader = req.headers.authorization;

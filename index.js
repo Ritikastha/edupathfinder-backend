@@ -5,7 +5,7 @@ const connectDB = require('./database/db');
 const cors=require('cors');
 const multiparty=require('connect-multiparty')
 const cloudinary=require('cloudinary').v2;
-
+const { authGuard} = require('./middleware/authGuard');
 
 dotenv.config();
 

@@ -1,16 +1,15 @@
 const { json, text } = require("express");
-const School=require('../model/basicModel') ;
-const cloudinary =require('cloudinary');
-const Basicinfo = require("../model/basicModel");
+const mongoose = require('mongoose');
+const Basicinfo = require('../model/basicModel');
 
 const createBasicinfo = async (req, res) => {
     console.log(req.body);
-    
+    console.log('User ID:', req.userId);  // Ensure this is correct
+    console.log('User Full Name:', req.userFullName);
+
     const { phone, age, level, gender, address, currentschool } = req.body;
-    const userId = req.userid;  // Access userId from the request object
-    const fullName = req.userFullName; // Access fullName from the request object
-   
-    // Step-3 validate the data
+    const userId = req.userId;
+
     if (!phone || !age || !level || !gender || !address || !currentschool) {
         return res.json({
             success: false,
@@ -18,8 +17,22 @@ const createBasicinfo = async (req, res) => {
         });
     }
 
-    // Step-4
+    if (!userId) {
+        return res.status(400).json({
+            success: false,
+            message: "User ID is missing"
+        });
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).json({
+            success: false,
+            message: "Invalid User ID"
+        });
+    }
+
     try {
+        // Check if Basicinfo already exists for this user
         const existingBasicinfo = await Basicinfo.findOne({ user: userId });
         if (existingBasicinfo) {
             return res.status(400).json({
@@ -36,8 +49,8 @@ const createBasicinfo = async (req, res) => {
             gender,
             address,
             currentschool,
-            user: userId, // Save the userId to the basicinfo document
-            fullName, // Save the fullName to the basicinfo document
+            userId: userId,
+            fullName: req.userFullName
         });
 
         await newBasicinfo.save();
@@ -45,7 +58,7 @@ const createBasicinfo = async (req, res) => {
             success: true,
             message: "Basicinfo created successfully",
             data: newBasicinfo
-        });    
+        });
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -55,6 +68,7 @@ const createBasicinfo = async (req, res) => {
         });
     }
 };
+
 
 
 const getAllBasicinfo = async (req, res) => {
@@ -79,7 +93,7 @@ const getSingleBasicinfo = async (req, res) => {
     console.log('User ID:', req.userId);// Ensure that this is the correct property name
     const userId = req.userId;
     try {
-        const singleBasicinfo = await Basicinfo.findOne({ user: userId });
+        const singleBasicinfo = await Basicinfo.findOne({ userId: userId });
         if (!singleBasicinfo) {
             return res.status(404).json({
                 success: false,
@@ -112,7 +126,7 @@ const updateBasicinfo = async (req, res) => {
 
     try {
         const updatedBasicinfo = await Basicinfo.findOneAndUpdate(
-            { user: userId }, // Correct query to find by userId
+            { userId: userId }, // Correct query to find by userId
             { fullName, phone, age, level, gender, address, currentschool },
             { new: true }
         );
