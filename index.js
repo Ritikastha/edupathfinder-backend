@@ -6,6 +6,7 @@ const cors=require('cors');
 const multiparty=require('connect-multiparty')
 const cloudinary=require('cloudinary').v2;
 const { authGuard} = require('./middleware/authGuard');
+// import logger from "./utils/logger.js";
 
 dotenv.config();
 
@@ -42,7 +43,7 @@ app.use('/api/addmission',require('./routes/addmissionRoutes'))
 const PORT=5000;
 
 app.listen(PORT, ()=>{
-  console.log(`Server is running on port ${PORT} `)
+  console.info(`Server is running on port ${PORT} `)
 })
 
 module.exports= app;

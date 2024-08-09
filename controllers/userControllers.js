@@ -1,7 +1,27 @@
 const { json } = require("express");
 const Users= require("../model/userModel")
 const bcrypt= require("bcrypt")
+const crypto = require('crypto');
+const moment = require('moment');
 const jwt=require("jsonwebtoken")
+const saltRounds = 10;
+
+const hashPassword = async (password) => {
+    return bcrypt.hash(password, saltRounds);
+};
+
+const hashEmail = (email) => {
+    return crypto.createHash('sha256').update(email).digest('hex');
+};
+const isPasswordReused = async (password, previousPasswords) => {
+    for (const entry of previousPasswords) {
+        const match = await bcrypt.compare(password, entry.hash);
+        if (match) {
+            return true;
+        }
+    }
+    return false;
+};
 
 const createUser =async (req,res)=>{
     console.log(req.body)
@@ -16,7 +36,8 @@ const createUser =async (req,res)=>{
     }
     try {
         // step 5:Check existing user
-        const existingUser=await Users.findOne({email:email})
+        const hashedEmail = hashEmail(email);
+        const existingUser=await Users.findOne({email:hashedEmail})
         if(existingUser){
            return res.json({
                success:false,
@@ -30,15 +51,20 @@ const createUser =async (req,res)=>{
         //        message:"Password doesnot match"
         //    })
         // }
-        const generateSalt =await bcrypt.genSalt(10)
-        const encryptedPassword=await bcrypt.hash(password,generateSalt)
+        // const generateSalt =await bcrypt.genSalt(10)
+        // const encryptedPassword=await bcrypt.hash(password,generateSalt)
+        const hashedPassword = await hashPassword(password);
 
         const newUser=new Users({
             fullName:fullName,
             // lastName:lastName,
-            email:email,
-            password:encryptedPassword,
-            confirmpassword:encryptedPassword,
+            email:hashedPassword,
+            password:hashedPassword,
+            confirmpassword:hashedPassword,
+            previousPasswords: [{
+                hash: hashedPassword,
+                passwordCreated: moment().format('YYYY-MM-DD HH:mm:ss')
+            }]
         })
         await newUser.save()
         // step 8:send the response
@@ -64,7 +90,7 @@ const loginUser = async (req, res) => {
         if (!user) {
             return res.status(400).json({
                 success: false,
-                message: "Invalid email "
+                message: "Invalid email "     
             });
         }
 

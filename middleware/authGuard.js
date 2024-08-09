@@ -24,6 +24,7 @@ const authGuard = (req, res, next) => {
     });
 };
 
+
 const authGuardAdmin = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (!authHeader) {

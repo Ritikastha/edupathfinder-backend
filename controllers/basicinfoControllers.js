@@ -33,7 +33,7 @@ const createBasicinfo = async (req, res) => {
 
     try {
         // Check if Basicinfo already exists for this user
-        const existingBasicinfo = await Basicinfo.findOne({ user: userId });
+        const existingBasicinfo = await Basicinfo.findOne({ user: userId }); //here
         if (existingBasicinfo) {
             return res.status(400).json({
                 success: false,
@@ -49,6 +49,7 @@ const createBasicinfo = async (req, res) => {
             gender,
             address,
             currentschool,
+            // here
             userId: userId,
             fullName: req.userFullName
         });
@@ -93,7 +94,7 @@ const getSingleBasicinfo = async (req, res) => {
     console.log('User ID:', req.userId);// Ensure that this is the correct property name
     const userId = req.userId;
     try {
-        const singleBasicinfo = await Basicinfo.findOne({ userId: userId });
+        const singleBasicinfo = await Basicinfo.findOne({ user: userId });
         if (!singleBasicinfo) {
             return res.status(404).json({
                 success: false,
@@ -126,7 +127,7 @@ const updateBasicinfo = async (req, res) => {
 
     try {
         const updatedBasicinfo = await Basicinfo.findOneAndUpdate(
-            { userId: userId }, // Correct query to find by userId
+            { user: userId }, // Correct query to find by userId
             { fullName, phone, age, level, gender, address, currentschool },
             { new: true }
         );

@@ -24,7 +24,13 @@ const userSchema = mongoose.Schema({
     isAdmin:{
         type:Boolean,
         default:false,
-    }
+    },
+    previousPasswords: [
+        {
+            hash: { type: String, required: true },
+            passwordCreated: { type: String, required: true }
+        }
+    ]
 })
 
 const Users = mongoose.model('users', userSchema);
