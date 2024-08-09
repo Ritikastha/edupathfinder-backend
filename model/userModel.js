@@ -28,7 +28,7 @@ const userSchema = mongoose.Schema({
     previousPasswords: [
         {
             hash: { type: String, required: true },
-            passwordCreated: { type: String, required: true }
+            passwordCreated: { type: Date, required: true }
         }
     ],
     loginAttempts: {

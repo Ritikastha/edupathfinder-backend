@@ -5,6 +5,14 @@ const crypto = require('crypto');
 const moment = require('moment');
 const jwt=require("jsonwebtoken")
 const saltRounds = 10;
+const passwordExpiryDays = 1;
+
+
+
+const displayPasswordCreatedDate = (date) => {
+    return moment(date).format('YYYY-MM-DD'); // Format as 'Year-Month-Day'
+}
+
 
 
 const hashPassword = async (password) => {
@@ -31,6 +39,8 @@ const createUser =async (req,res)=>{
         // step 5:Check existing user
         const hashedEmail = hashEmail(email);
         const existingUser=await Users.findOne({email:hashedEmail})
+        const formattedDate = displayPasswordCreatedDate(user.previousPasswords[0].passwordCreated);
+        console.log("Formatted Password Created Date:", formattedDate);
         if(existingUser){
            return res.json({
                success:false,
@@ -57,10 +67,12 @@ const createUser =async (req,res)=>{
             confirmpassword:hashedPassword,
             previousPasswords: [{
                 hash: hashedPassword,
-                passwordCreated: moment().format('YYYY-MM-DD HH:mm:ss')
+                // passwordCreated: moment().format('YYYY-MM-DD HH:mm:ss')
+                passwordCreated:new Date()
             }],
             loginAttempts: 0,
-            lockUntil: null
+            lockUntil: null,
+            lastPasswordChange: new Date() 
         })
         await newUser.save()
         // step 8:send the response
@@ -108,7 +120,14 @@ const loginUser = async (req, res) => {
             user.lockUntil = null;
         }
 
-
+        // Check if password has expired
+        const lastPasswordChange = user.previousPasswords[0]?.passwordCreated;
+        if (lastPasswordChange && moment().diff(moment(lastPasswordChange), 'days') > passwordExpiryDays) {
+            return res.status(403).json({
+                success: false,
+                message: 'Your password has expired. Please change your password.'
+            });
+        }
         const isValidPassword = await bcrypt.compare(password, user.password);
 
         if (!isValidPassword) {
