@@ -5,7 +5,7 @@ const crypto = require('crypto');
 const moment = require('moment');
 const jwt=require("jsonwebtoken")
 const saltRounds = 10;
-const passwordExpiryDays = 1;
+const passwordExpiryDays = 90;
 
 
 
