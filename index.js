@@ -6,7 +6,8 @@ const cors=require('cors');
 const multiparty=require('connect-multiparty')
 const cloudinary=require('cloudinary').v2;
 const { authGuard} = require('./middleware/authGuard');
-// import logger from "./utils/logger.js";
+const session = require('express-session');
+
 
 dotenv.config();
 
@@ -31,6 +32,13 @@ app.use(cors(corsPolicy));
 app.use(multiparty());
 
 app.use(express.json());
+
+app.use(session({
+  secret:process.env.SECRET_KEY, // Change this to a strong secret key
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } 
+}));
 
 app.use('/api/user',require('./routes/usersRoutes'))
 app.use('/api/school',require('./routes/schoolsRoutes'))

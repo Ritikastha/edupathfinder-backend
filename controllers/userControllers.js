@@ -6,6 +6,7 @@ const moment = require('moment');
 const jwt=require("jsonwebtoken")
 const saltRounds = 10;
 
+
 const hashPassword = async (password) => {
     return bcrypt.hash(password, saltRounds);
 };
@@ -13,15 +14,7 @@ const hashPassword = async (password) => {
 const hashEmail = (email) => {
     return crypto.createHash('sha256').update(email).digest('hex');
 };
-const isPasswordReused = async (password, previousPasswords) => {
-    for (const entry of previousPasswords) {
-        const match = await bcrypt.compare(password, entry.hash);
-        if (match) {
-            return true;
-        }
-    }
-    return false;
-};
+
 
 const createUser =async (req,res)=>{
     console.log(req.body)
@@ -44,6 +37,7 @@ const createUser =async (req,res)=>{
                message:"User already exists"
            })
         }
+       
         // const checkpassword=await Users.findOne({password:confirmpassword})
         // if(!checkpassword){
         //    return res.json({
@@ -58,13 +52,15 @@ const createUser =async (req,res)=>{
         const newUser=new Users({
             fullName:fullName,
             // lastName:lastName,
-            email:hashedPassword,
+            email:hashedEmail,
             password:hashedPassword,
             confirmpassword:hashedPassword,
             previousPasswords: [{
                 hash: hashedPassword,
                 passwordCreated: moment().format('YYYY-MM-DD HH:mm:ss')
-            }]
+            }],
+            loginAttempts: 0,
+            lockUntil: null
         })
         await newUser.save()
         // step 8:send the response
@@ -81,29 +77,60 @@ const createUser =async (req,res)=>{
 }
         
 // login
+const maxLoginAttempts = 3;
+const lockTime = 60 * 60 * 1000; // 1 hour lock time
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
+    const hashedEmail = hashEmail(email);
     try {
-        const user = await Users.findOne({ email });
+        const user = await Users.findOne({ email: hashedEmail });
 
         if (!user) {
+            console.log('User not found:', hashedEmail);
             return res.status(400).json({
                 success: false,
                 message: "Invalid email "     
             });
         }
 
-        // Perform password validation (e.g., using bcrypt)
+          // Check if the account is currently locked
+        if (user.lockUntil && user.lockUntil > Date.now()) {
+            return res.status(403).json({
+                success: false,
+                message: `Account locked. Try again later.`
+            });
+        }
+
+        // Reset login attempts if account is unlocked or first attempt
+        if (user.lockUntil && user.lockUntil <= Date.now()) {
+            user.loginAttempts = 0;
+            user.lockUntil = null;
+        }
+
 
         const isValidPassword = await bcrypt.compare(password, user.password);
 
         if (!isValidPassword) {
+            user.loginAttempts += 1;
+
+            if (user.loginAttempts >= maxLoginAttempts) {
+                user.lockUntil = Date.now() + lockTime; // Set lock time
+                user.loginAttempts = 0; // Reset login attempts after locking
+            }
+            await user.save();
+
             return res.status(400).json({
                 success: false,
                 message: "Invalid password"
             });
         }
+
+        // Reset login attempts on successful login
+        user.loginAttempts = 0;
+        user.lockUntil = null;
+
+        await user.save();
 
         // Generate JWT token
         const tokenPayload= {

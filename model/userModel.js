@@ -30,7 +30,14 @@ const userSchema = mongoose.Schema({
             hash: { type: String, required: true },
             passwordCreated: { type: String, required: true }
         }
-    ]
+    ],
+    loginAttempts: {
+        type: Number,
+        default: 0
+    },
+    lockUntil: {
+        type: Date
+    }
 })
 
 const Users = mongoose.model('users', userSchema);
