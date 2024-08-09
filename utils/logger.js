@@ -1,23 +1,38 @@
-// import mongoose from "mongoose";
-// import { createLogger, format, transports } from "winston";
-// const { combine, timestamp, printf } = format;
-// import "winston-mongodb";
 
-// const logFormat = printf(({ level, message, timestamp }) => {
-//   return `${timestamp} ${level}: ${message}`;
-// });
 
-// const logger = createLogger({
-//   level: "info",
-//   format: combine(timestamp(), logFormat),
-//   transports: [
-//     new transports.MongoDB({
-//       db: mongoose.connection.useDb("edupathfinder"),
-//       options: { useUnifiedTopology: true },
-//       collection: "auditlogs",
-//       format: format.combine(format.timestamp(), format.json()),
-//     }),
-//   ],
-// });
+const { createLogger,transports,format } = require("winston");
+require('winston-mongodb');
+const { combine, timestamp, json, printf } = format;
 
-// export default logger;
+const logFormat = printf(({ level, message, timestamp, meta }) => {
+    return `${timestamp} ${level}: ${message} ${meta ? JSON.stringify(meta) : ''}`;
+});
+
+const logger = createLogger({
+    format: combine(
+        timestamp(),
+        logFormat
+    ),
+ 
+  transports: [
+    new transports.File({
+     filename:'info.log',
+     level:'info',
+     format:format.combine(format.timestamp(), format.json())
+   
+    }),
+    new transports.MongoDB({
+        level:'error',
+        db: 'mongodb+srv://test:test@cluster0.tkb1eon.mongodb.net/edupathfinder',
+        options: { 
+            useUnifiedTopology: true 
+        } ,
+        collection:'logs',
+        format:format.combine(format.timestamp(), format.json())
+        
+    })
+  ],
+});
+// logger.info('Logger setup complete.');
+
+module.exports=logger;

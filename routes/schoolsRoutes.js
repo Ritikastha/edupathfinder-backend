@@ -1,10 +1,10 @@
 const router =require('express').Router();
 const schoolsControllers = require('../controllers/schoolsControllers');
-// const { authGuard} = require('../middleware/authGuard');
+const { authGuardAdmin} = require('../middleware/authGuard');
 
 
 // create booking api
-router.post('/create_school',schoolsControllers.createSchool)
+router.post('/create_school',authGuardAdmin,schoolsControllers.createSchool)
 
 // get all booking api
 router.get('/get_school',schoolsControllers.getAllSchool)
@@ -13,6 +13,6 @@ router.get('/get_school',schoolsControllers.getAllSchool)
 // router.get('/get_package/:id',packageControllers.getSinglePackage)
 
 // delete booking api
-router.delete('/delete_school/:id',schoolsControllers.deletedSchool)
+router.delete('/delete_school/:id',authGuardAdmin,schoolsControllers.deletedSchool)
 
 module.exports=router;

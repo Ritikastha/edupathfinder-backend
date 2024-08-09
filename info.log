@@ -1,0 +1,145 @@
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T14:50:00.772Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T15:20:52.184Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T15:21:04.360Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T15:22:07.211Z"}
+{"level":"error","message":"Server is running on port 5000 ","timestamp":"2024-08-14T15:23:07.012Z"}
+{"level":"error","message":"Server is running on port 5000 ","timestamp":"2024-08-14T15:24:54.257Z"}
+{"level":"error","message":"Server is running on port 5000 ","timestamp":"2024-08-14T15:25:28.952Z"}
+{"level":"error","message":"Server is running on port 5000 ","timestamp":"2024-08-14T15:53:23.629Z"}
+{"level":"error","message":"Server is running on port 5000 ","timestamp":"2024-08-14T16:02:17.399Z"}
+{"level":"error","message":"Server is running on port 5000 ","timestamp":"2024-08-14T16:02:30.145Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T16:03:07.855Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T16:18:16.558Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T16:27:26.480Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T16:35:37.530Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T17:15:17.995Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T17:26:55.473Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T17:28:21.783Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T17:29:41.252Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T17:31:35.449Z"}
+{"level":"info","message":"Logger setup complete.","timestamp":"2024-08-14T17:38:17.311Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T17:38:17.509Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T18:06:20.472Z"}
+{"level":"error","message":"Server error","meta":{"error":"Cannot read properties of undefined (reading 'connect.sid')","stack":"TypeError: Cannot read properties of undefined (reading 'connect.sid')\n    at auditLogger (C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\middleware\\authGuard.js:163:31)\n    at Layer.handle [as handle_request] (C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at session (C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express-session\\index.js:487:7)\n    at Layer.handle [as handle_request] (C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express\\lib\\router\\index.js:286:9"},"timestamp":"2024-08-14T18:07:01.398Z"}
+{"level":"error","message":"Server error","meta":{"error":"Cannot read properties of undefined (reading 'connect.sid')","stack":"TypeError: Cannot read properties of undefined (reading 'connect.sid')\n    at auditLogger (C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\middleware\\authGuard.js:163:31)\n    at Layer.handle [as handle_request] (C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at session (C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express-session\\index.js:487:7)\n    at Layer.handle [as handle_request] (C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\Dell\\Documents\\Edupathfinder_backend\\node_modules\\express\\lib\\router\\index.js:286:9"},"timestamp":"2024-08-14T18:07:57.602Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T18:09:15.245Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:10:10.293Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:10:10.312Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:10:10.322Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:10:10.324Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:10:10.343Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:10:10.344Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:10:10.380Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:10:10.419Z"}
+{"level":"info","message":"User activity","meta":{"method":"POST","sessionId":"No session","url":"/api/user/login","userName":"anonymous"},"timestamp":"2024-08-14T18:10:30.641Z"}
+{"level":"info","message":"User activity","meta":{"method":"POST","sessionId":"No session","url":"/api/user/login","userName":"anonymous"},"timestamp":"2024-08-14T18:11:13.795Z"}
+{"level":"info","message":"User activity","meta":{"method":"POST","sessionId":"No session","url":"/api/user/login","userName":"anonymous"},"timestamp":"2024-08-14T18:11:48.120Z"}
+{"level":"info","message":"User activity","meta":{"method":"POST","sessionId":"No session","url":"/api/user/login","userName":"anonymous"},"timestamp":"2024-08-14T18:12:06.919Z"}
+{"level":"info","message":"User activity","meta":{"method":"POST","sessionId":"No session","url":"/api/user/create","userName":"anonymous"},"timestamp":"2024-08-14T18:13:12.163Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:13:12.581Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:13:12.582Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo","userName":"anonymous"},"timestamp":"2024-08-14T18:13:12.587Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo","userName":"Anonymous"},"timestamp":"2024-08-14T18:13:12.588Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:13:12.590Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:13:12.591Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo","userName":"anonymous"},"timestamp":"2024-08-14T18:13:12.595Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo","userName":"Anonymous"},"timestamp":"2024-08-14T18:13:12.596Z"}
+{"level":"info","message":"User activity","meta":{"method":"POST","sessionId":"No session","url":"/api/user/login","userName":"anonymous"},"timestamp":"2024-08-14T18:14:13.998Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:14:14.401Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:14:14.408Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:14:14.411Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:14:14.412Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:14:14.419Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:14:14.419Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:14:14.468Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:14:14.480Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T18:18:49.180Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:18:58.231Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:18:58.236Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:18:58.257Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:18:58.272Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:18:58.279Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:18:58.280Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:18:58.360Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:18:58.365Z"}
+{"level":"info","message":"User activity","meta":{"method":"POST","sessionId":"No session","url":"/api/user/login","userName":"anonymous"},"timestamp":"2024-08-14T18:19:15.659Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:19:16.052Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:19:16.058Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:19:16.070Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:19:16.071Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:19:16.079Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:19:16.080Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:19:16.113Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:19:16.132Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T18:21:35.818Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:21:42.314Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:21:42.316Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:21:42.342Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:21:42.355Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:21:42.362Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:21:42.364Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:21:42.435Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:21:42.440Z"}
+{"level":"info","message":"User activity","meta":{"method":"POST","sessionId":"No session","url":"/api/user/login","userName":"anonymous"},"timestamp":"2024-08-14T18:21:57.317Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:21:57.707Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:21:57.713Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:21:57.714Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:21:57.721Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:21:57.733Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:21:57.734Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:21:57.789Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:21:57.793Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T18:24:35.161Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T18:25:27.936Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:25:53.132Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:25:53.137Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:25:53.161Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:25:53.183Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:25:53.193Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:25:53.195Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:25:53.291Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:25:53.297Z"}
+{"level":"info","message":"User activity","meta":{"method":"POST","sessionId":"No session","url":"/api/user/login","userName":"anonymous"},"timestamp":"2024-08-14T18:26:12.315Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:26:12.679Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:26:12.684Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:26:12.693Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:26:12.693Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:26:12.699Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:26:12.702Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:26:12.733Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:26:12.746Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T18:33:55.524Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T18:34:20.844Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:38:32.151Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:38:32.154Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:38:32.177Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:38:32.195Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:38:32.204Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:38:32.206Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-14T18:38:32.269Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:38:32.274Z"}
+{"level":"info","message":"User activity","meta":{"method":"POST","sessionId":"No session","url":"/api/user/create","userName":"anonymous"},"timestamp":"2024-08-14T18:39:29.266Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:39:29.960Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:39:29.961Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo","userName":"anonymous"},"timestamp":"2024-08-14T18:39:29.970Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo","userName":"Anonymous"},"timestamp":"2024-08-14T18:39:29.971Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"anonymous"},"timestamp":"2024-08-14T18:39:29.977Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo/undefined","userName":"Anonymous"},"timestamp":"2024-08-14T18:39:29.978Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo","userName":"anonymous"},"timestamp":"2024-08-14T18:39:29.984Z"}
+{"level":"error","message":"Token is invalid","meta":{"method":"GET","sessionId":"No session","url":"/api/basicinfo/get_basicinfo","userName":"Anonymous"},"timestamp":"2024-08-14T18:39:29.985Z"}
+{"level":"info","message":"User activity","meta":{"method":"POST","sessionId":"No session","url":"/api/user/login","userName":"anonymous"},"timestamp":"2024-08-14T18:40:18.769Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:40:19.472Z"}
+{"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-14T18:40:19.597Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T18:45:28.545Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T18:47:13.519Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T18:47:30.509Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T18:47:43.083Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T18:47:44.856Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T18:51:29.468Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T18:54:57.840Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T18:55:38.193Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T19:12:28.773Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T19:16:54.737Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-14T19:17:06.250Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-09T19:18:39.484Z"}
+{"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-09T19:18:49.154Z"}

@@ -6,15 +6,29 @@ const moment = require('moment');
 const jwt=require("jsonwebtoken")
 const saltRounds = 10;
 const passwordExpiryDays = 90;
+// const runTests = async () => {
+//     const testPassword = 'Sita123@'; // The password you used for the test
+//     const storedHash = '$2b$10$1WNQ/wQZxPAfjgwg6p46TO8st4XGcMp7Ret2CAG/VJPYYZFlwfVqi'; // The hash from your MongoDB
+
+//     try {
+//         const result = await bcrypt.compare(testPassword, storedHash);
+//         console.log('Password match result:', result); // Should be true if the passwords match
+
+//         const newHash = await bcrypt.hash('NewPassword123!', saltRounds);
+//         console.log('New hash:', newHash);
+//     } catch (err) {
+//         console.error('Error:', err);
+//     }
+// };
+
+// Call the async function
 
 
 
 const displayPasswordCreatedDate = (date) => {
     return moment(date).format('YYYY-MM-DD'); // Format as 'Year-Month-Day'
 }
-
-
-
+ 
 const hashPassword = async (password) => {
     return bcrypt.hash(password, saltRounds);
 };
@@ -39,8 +53,8 @@ const createUser =async (req,res)=>{
         // step 5:Check existing user
         const hashedEmail = hashEmail(email);
         const existingUser=await Users.findOne({email:hashedEmail})
-        const formattedDate = displayPasswordCreatedDate(user.previousPasswords[0].passwordCreated);
-        console.log("Formatted Password Created Date:", formattedDate);
+        // const formattedDate = displayPasswordCreatedDate(user.previousPasswords[0].passwordCreated);
+        // console.log("Formatted Password Created Date:", formattedDate);
         if(existingUser){
            return res.json({
                success:false,
@@ -80,17 +94,21 @@ const createUser =async (req,res)=>{
             success:true,
             message:"User created sucessfully !"
         }
-            )
+            );
 
     } catch (error) {
-        console.log(error)
-        res.status(500).json("Server Error")
+        console.error("Error creating user:", error.message);
+        res.status(500).json({
+            success: false,
+            message: "Server error",
+            error: error.message
+        });
     }
 }
         
 // login
 const maxLoginAttempts = 3;
-const lockTime = 60 * 60 * 1000; // 1 hour lock time
+const lockTime =  60* 60 * 1000; // 1 hour lock time
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
@@ -125,9 +143,18 @@ const loginUser = async (req, res) => {
         if (lastPasswordChange && moment().diff(moment(lastPasswordChange), 'days') > passwordExpiryDays) {
             return res.status(403).json({
                 success: false,
-                message: 'Your password has expired. Please change your password.'
+                message: 'Your password has expired. Please change your password.',
+                passwordExpired: true
             });
+            
         }
+        // const lastPasswordChange = user.previousPasswords[0]?.passwordCreated;
+        // if (lastPasswordChange && moment().diff(moment(lastPasswordChange, 'YYYY-MM-DD'), 'days') > passwordExpiryDays) {
+        //     return res.status(403).json({
+        //         success: false,
+        //         message: 'Your password has expired. Please change your password.'
+        //     });
+        // }
         const isValidPassword = await bcrypt.compare(password, user.password);
 
         if (!isValidPassword) {
@@ -202,8 +229,80 @@ const getUser =async (req,res)=>{
 
 }
 
+// Update Password Function
+const updatePassword = async (req, res) => {
+    const { email, oldPassword, newPassword } = req.body;
+
+    if (!email || !oldPassword || !newPassword) {
+        return res.status(400).json({
+            success: false,
+            message: "Please provide email, old password, and new password."
+        });
+    }
+
+    try {
+        const hashedEmail = hashEmail(email);
+        const user = await Users.findOne({ email: hashedEmail });
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found."
+            });
+        }
+    // Log for debugging
+    console.log('Stored password hash:', user.password);
+    console.log('Old password provided:', oldPassword);
+
+    const isOldPasswordValid = await bcrypt.compare(oldPassword.trim(), user.password);
+        if (!isOldPasswordValid) {
+            console.log('Password comparison failed');
+            // console.log('Stored password hash:', user.password);
+            // console.log('Old password provided:', oldPassword);
+            return res.status(400).json({
+                success: false,
+                message: "Old password is incorrect."
+            });
+        }
+
+        const isNewPasswordSame = await bcrypt.compare(newPassword.trim(), user.password);
+        if (isNewPasswordSame) {
+            return res.status(400).json({
+                success: false,
+                message: "New password cannot be the same as the old password."
+            });
+        }
+
+        const hashedNewPassword = await hashPassword(newPassword);
+
+        // Update user document
+        user.password = hashedNewPassword;
+        user.confirmpassword = hashedNewPassword; // Ensure this field is also updated
+        user.lastPasswordChange = new Date(); // Update lastPasswordChange to current date
+
+        // Add new password to previousPasswords
+        user.previousPasswords.push({
+            hash: hashedNewPassword,
+            passwordCreated: new Date()
+        });
+
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Password updated successfully."
+        });
+    } catch (error) {
+        console.error("Error updating password:", error.message);
+        res.status(500).json({
+            success: false,
+            message: "Server error",
+            error: error.message
+        });
+    }
+};
 
 
 module.exports = {
-    createUser,loginUser,getUser
+    createUser,loginUser,getUser,updatePassword
 }
