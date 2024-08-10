@@ -41,7 +41,10 @@ app.use(session({
   saveUninitialized: true,
   cookie: {
      secure: false,
-    
+    //  --
+     maxAge:30000* 60 *60 *24,
+     httpOnly:false,
+    //  ---
  } 
 }));
 app.use(auditLogger);
