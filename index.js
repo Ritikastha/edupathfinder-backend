@@ -9,7 +9,6 @@ const { authGuard} = require('./middleware/authGuard');
 const session = require('express-session');
 const logger =require("./utils/logger")
 const {auditLogger} = require('./middleware/authGuard')
-
 const cookieParser = require('cookie-parser');
 dotenv.config();
 
@@ -24,12 +23,21 @@ api_secret:process.env.API_SECRET
 const app=express();
 connectDB();
 
-const corsPolicy={
-  origin:true,
-  credential:true,
-  optionSuccessStatus:200
-}
-app.use(cors(corsPolicy));
+// const corsPolicy={
+//   origin:true,
+//   credential:true,
+//   optionSuccessStatus:200
+// }
+
+app.use(
+  cors({
+    origin:["https://localhost:3000"],
+    methods:["GET","POST","PUT","DELETE"],
+    credentials:true,
+  })
+)
+
+// app.use(cors(corsPolicy));
 
 app.use(multiparty());
 
@@ -41,12 +49,11 @@ app.use(session({
   saveUninitialized: true,
   cookie: {
      secure: false,
-    //  --
      maxAge:30000* 60 *60 *24,
      httpOnly:false,
-    //  ---
  } 
 }));
+app.use(helmet());
 app.use(auditLogger);
 app.use('/api/audit', require('./routes/auditRoutes'));
 // router.get('/logs', getLogs);
@@ -74,3 +81,4 @@ app.listen(PORT, ()=>{
 })
 
 module.exports= app;
+

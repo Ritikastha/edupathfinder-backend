@@ -1,13 +1,11 @@
-// controllers/auditController.js
+const AuditLog = require('../model/auditModel'); // Replace with your actual model
+
 const getLogs = async (req, res) => {
     try {
-        // Fetch logs from the database or another source
-        const logs = [
-            { _id: '1', timestamp: new Date(), userName: 'JohnDoe', ipAddress: '192.168.1.1', status: 'Success' }
-        ];
+        const logs = await AuditLog.find({}); // Modify query as needed
         res.json(logs);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ message: 'Error fetching logs', error });
     }
 };
 

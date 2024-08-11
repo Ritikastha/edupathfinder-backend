@@ -158,8 +158,8 @@ const authGuardAdmin = (req, res, next) => {
 };
 
 const auditLogger = (req, res, next) => {
-    try {
-        const userName = req.session && req.session.user ? req.session.user.email : 'anonymous';
+    
+        const userName =  req.session.user.email ;
         
         // Create the log object
         const log = {
@@ -168,17 +168,11 @@ const auditLogger = (req, res, next) => {
             method: req.method,
             userName: userName
         };
-
-        // Log the information
-        console.log(`User activity: ${userName}`);
+        console.log('Log data:', log);
         logger.info('User activity', { meta: log });
-    } catch (error) {
-        console.error('Error in auditLogger:', error);
-    }
-
-    // Call the next middleware or route handler
     next();
 };
+
 
 
 

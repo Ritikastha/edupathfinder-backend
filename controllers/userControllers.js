@@ -6,6 +6,7 @@ const moment = require('moment');
 const jwt=require("jsonwebtoken")
 const saltRounds = 10;
 const passwordExpiryDays = 90;
+
 // const runTests = async () => {
 //     const testPassword = 'Sita123@'; // The password you used for the test
 //     const storedHash = '$2b$10$1WNQ/wQZxPAfjgwg6p46TO8st4XGcMp7Ret2CAG/VJPYYZFlwfVqi'; // The hash from your MongoDB
@@ -75,13 +76,11 @@ const createUser =async (req,res)=>{
 
         const newUser=new Users({
             fullName:fullName,
-            // lastName:lastName,
             email:hashedEmail,
             password:hashedPassword,
             confirmpassword:hashedPassword,
             previousPasswords: [{
                 hash: hashedPassword,
-                // passwordCreated: moment().format('YYYY-MM-DD HH:mm:ss')
                 passwordCreated:new Date()
             }],
             loginAttempts: 0,
@@ -111,11 +110,9 @@ const maxLoginAttempts = 3;
 const lockTime =  60* 60 * 1000; // 1 hour lock time
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
-
     const hashedEmail = hashEmail(email);
     try {
         const user = await Users.findOne({ email: hashedEmail });
-
         if (!user) {
             console.log('User not found:', hashedEmail);
             return res.status(400).json({
@@ -123,7 +120,6 @@ const loginUser = async (req, res) => {
                 message: "Invalid email "     
             });
         }
-
           // Check if the account is currently locked
         if (user.lockUntil && user.lockUntil > Date.now()) {
             return res.status(403).json({
@@ -131,7 +127,6 @@ const loginUser = async (req, res) => {
                 message: `Account locked. Try again later.`
             });
         }
-
         // Reset login attempts if account is unlocked or first attempt
         if (user.lockUntil && user.lockUntil <= Date.now()) {
             user.loginAttempts = 0;
@@ -148,13 +143,6 @@ const loginUser = async (req, res) => {
             });
             
         }
-        // const lastPasswordChange = user.previousPasswords[0]?.passwordCreated;
-        // if (lastPasswordChange && moment().diff(moment(lastPasswordChange, 'YYYY-MM-DD'), 'days') > passwordExpiryDays) {
-        //     return res.status(403).json({
-        //         success: false,
-        //         message: 'Your password has expired. Please change your password.'
-        //     });
-        // }
         const isValidPassword = await bcrypt.compare(password, user.password);
 
         if (!isValidPassword) {
@@ -251,14 +239,11 @@ const updatePassword = async (req, res) => {
             });
         }
     // Log for debugging
-    console.log('Stored password hash:', user.password);
-    console.log('Old password provided:', oldPassword);
+    // console.log('Stored password hash:', user.password);
+    // console.log('Old password provided:', oldPassword);
 
     const isOldPasswordValid = await bcrypt.compare(oldPassword.trim(), user.password);
         if (!isOldPasswordValid) {
-            console.log('Password comparison failed');
-            // console.log('Stored password hash:', user.password);
-            // console.log('Old password provided:', oldPassword);
             return res.status(400).json({
                 success: false,
                 message: "Old password is incorrect."

@@ -1,6 +1,7 @@
 const { json, text } = require("express");
 const cloudinary =require('cloudinary');
 const Addmission = require("../model/addmissionModel");
+const { encrypt, decrypt } = require('./encryptionUtils'); 
 const createAddmission=async (req ,res)=>{
     console.log(req.body);
     
@@ -17,8 +18,12 @@ const createAddmission=async (req ,res)=>{
      }
      // step4
      try{
-        // step-5 upload image to cloudinary
-        const uploadedImage=await cloudinary.v2.uploader.upload(
+          const encryptedGuardianPhone = encrypt(guardianPhone);
+          const encryptedNationality = encrypt(nationality);
+          const encryptedPreviousSchool = encrypt(previousSchool);
+          const encryptedFatherOccupation = encrypt(fatherOccupation);
+          const encryptedMotherOccupation = encrypt(motherOccupation);
+          const uploadedImage=await cloudinary.v2.uploader.upload(
             imageUrl.path,
             {
                  folder:'addmission',
@@ -27,17 +32,15 @@ const createAddmission=async (req ,res)=>{
             }
        )
            // save product to database
-          //  taking from product model
            const newAddmission= new Addmission({
             fatherName:fatherName,
             motherName:motherName,
-            fatherOccupation:fatherOccupation,
-            motherOccupation:motherOccupation,
-            guardianPhone:guardianPhone,
-            nationality:nationality,
-            previousSchool:previousSchool,
+            fatherOccupation:encryptedFatherOccupation,
+            motherOccupation:encryptedMotherOccupation,
+            guardianPhone:encryptedGuardianPhone,
+            nationality:encryptedNationality,
+            previousSchool:encryptedPreviousSchool,
             grade:grade,
-            
             imageUrl:uploadedImage.secure_url
 
            })
@@ -59,6 +62,15 @@ const createAddmission=async (req ,res)=>{
 const getAllAddmission =async (req,res)=>{
      try{
           const listOfAddmission =await Addmission.find();
+          // Decrypt data before sending to the client
+        listOfAddmission.forEach((admission) => {
+          admission.fatherOccupation = decrypt(admission.fatherOccupation);
+          admission.motherOccupation = decrypt(admission.motherOccupation);
+          admission.guardianPhone = decrypt(admission.guardianPhone);
+          admission.nationality = decrypt(admission.nationality);
+          admission.previousSchool = decrypt(admission.previousSchool);
+      });
+
           res.json({
                success:false,
                message:"Addmission fetched successfully",

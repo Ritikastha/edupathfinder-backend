@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-
-// Controller function to handle the logs
 const { getLogs } = require('../controllers/auditControllers');
+const { authGuardAdmin } = require('../middleware/authGuard');
 
-// Define the route for fetching logs
-router.get('/logs', getLogs);
+// Define the route for fetching logs, protected by authGuardAdmin
+router.get('/logs', authGuardAdmin, getLogs);
 
 module.exports = router;
