@@ -1,8 +1,8 @@
 const crypto = require('crypto');
 
 const algorithm = 'aes-256-cbc'; // Encryption algorithm
-const key = Buffer.from(process.env.ENCRYPTION_KEY, 'hex'); // Encryption key from environment variables
-const iv = crypto.randomBytes(16); // Initialization vector
+const key = Buffer.from(process.env.ENCRYPTION_KEY, 'hex'); 
+const iv = crypto.randomBytes(16); 
 
 // Encrypt function
 function encrypt(text) {

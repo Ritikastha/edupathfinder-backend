@@ -4,6 +4,7 @@ const bcrypt= require("bcrypt")
 const crypto = require('crypto');
 const moment = require('moment');
 const jwt=require("jsonwebtoken")
+const mongoSanitize = require('mongo-sanitize');
 const saltRounds = 10;
 const passwordExpiryDays = 90;
 
@@ -201,21 +202,44 @@ const loginUser = async (req, res) => {
     }
 }
 
-const getUser =async (req,res)=>{
-    try{
-         const listOfUser =await Users.find();
-         res.json({
-              success:false,
-              message:"User fetched successfully",
-              Users:listOfUser
-         })
+// const getUser =async (req,res)=>{
+//     try{
+//          const listOfUser =await Users.find();
+//          res.json({
+//               success:false,
+//               message:"User fetched successfully",
+//               Users:listOfUser
+//          })
 
-    }catch(error){
-         console.log(error);
-         res.status(500).json("Server Error")
+//     }catch(error){
+//          console.log(error);
+//          res.status(500).json("Server Error")
+//     }
+
+// }
+const getUser = async (req, res) => {
+    try {
+        // Sanitize any query parameters or inputs
+        const sanitizedQuery = mongoSanitize(req.query);
+
+        // Fetch users based on sanitized query (if applicable)
+        const listOfUser = await Users.find(sanitizedQuery);
+
+        res.json({
+            success: true, // Assuming success should be true
+            message: "Users fetched successfully",
+            users: listOfUser
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: "Server Error"
+        });
     }
+};
 
-}
 
 // Update Password Function
 const updatePassword = async (req, res) => {
