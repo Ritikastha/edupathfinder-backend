@@ -54,6 +54,7 @@ app.use(session({
  } 
 }));
 app.use(helmet());
+app.use(mongoSanitize());
 app.use(auditLogger);
 app.use('/api/audit', require('./routes/auditRoutes'));
 // router.get('/logs', getLogs);
