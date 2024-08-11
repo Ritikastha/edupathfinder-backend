@@ -219,14 +219,12 @@ const loginUser = async (req, res) => {
 // }
 const getUser = async (req, res) => {
     try {
-        // Sanitize any query parameters or inputs
+        
         const sanitizedQuery = mongoSanitize(req.query);
-
-        // Fetch users based on sanitized query (if applicable)
         const listOfUser = await Users.find(sanitizedQuery);
 
         res.json({
-            success: true, // Assuming success should be true
+            success: true, 
             message: "Users fetched successfully",
             users: listOfUser
         });

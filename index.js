@@ -57,6 +57,16 @@ app.use(helmet());
 
 app.use(mongoSanitize());
 app.use(xss());
+
+const csrfProtection = csurf({ cookie: true });
+app.use(csrfProtection);
+
+
+app.use((req, res, next) => {
+    res.locals.csrfToken = req.csrfToken();
+    next();
+});
+
 app.use(auditLogger);
 app.use('/api/audit', require('./routes/auditRoutes'));
 // router.get('/logs', getLogs);
