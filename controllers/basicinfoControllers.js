@@ -48,7 +48,7 @@ const createBasicinfo = async (req, res) => {
         // console.log(typeof userId)
 
 
-        const user111 = await Users.findOne({ _id: userId });
+        // const user111 = await Users.findOne({ _id: userId });
 
 
         // Save basic info to database
@@ -59,7 +59,7 @@ const createBasicinfo = async (req, res) => {
             gender,
             address,
             currentschool,
-            user: user111._id,
+            user: userId,
             fullName: req.body.fullName
         });
 
@@ -131,46 +131,12 @@ const updateHai = (newObj, userId) => {
 
 
 const updateBasicinfo = async (req, res) => {
-    console.log('User ID:', req.userId);
-    const userId = req.body.userId; // Correctly access userId
 
-    const { fullName, phone, age, level, gender, address, currentschool } = req.body;
-
-    console.log(req.body)
-
-
-    console.log('User ID:', req.body.userId);
-
-
-
-    if (!fullName || !phone || !age || !level || !gender || !address || !currentschool) {
-        return res.status(400).json({
-            success: false,
-            message: 'All fields are required!'
-        });
-    }
-
-
-    console.log("bruh", userId)
-
-    // const user111 = await Users.findOne({ _id: userId });
-
-    // const newObj = {
-    //     fullName, phone, age, level, gender, address, currentschool, user: user111._id,
-    // }
-
-    Basicinfo.findOneAndUpdate(
-        { _id: userId },
+    await Basicinfo.findOneAndUpdate(
+        { user: req.body.user },
         { $set: req.body },
         { new: true }
     )
-    // console.log(newObj)
-
-    // await Basicinfo.findOneAndUpdate(
-    //     { _id: userId }, // Correct query to find by userId
-    //     { $set: newObj },
-    //     { new: true }
-    // );
 
     // if (!updatedBasicinfo) {
     //     return res.status(401).json({

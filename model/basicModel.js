@@ -32,8 +32,8 @@ const basicinfoScheme = new mongoose.Schema({
         trim: true,
     },
     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Users',
+        type: String,
+        trim: true,
         required: true,
     },
     fullName: {
