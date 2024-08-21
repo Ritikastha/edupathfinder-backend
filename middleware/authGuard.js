@@ -1,8 +1,12 @@
 const jwt = require('jsonwebtoken');
 const logger = require('../utils/logger');
 const authGuard = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+
+
+    console.log("verify cookie: %s", req.cookies["connect.sid"]);
+    console.log("jwt token: %s", req.headers.authorization);
+
+    const token = req.headers.authorization;
 
     // if (!token) {
     //     return res.status(401).json({
@@ -12,7 +16,7 @@ const authGuard = (req, res, next) => {
     // }
     if (!token) {
         const log = {
-            userName: req.session?.user?.email|| 'Anonymous',
+            userName: req.session?.user?.email || 'Anonymous',
             sessionId: req.cookies['connect.sid'] || 'No session',
             url: req.originalUrl,
             method: req.method,
@@ -24,35 +28,28 @@ const authGuard = (req, res, next) => {
         });
     }
     jwt.verify(token, process.env.JWT_TOKEN_SECRET, (err, user) => {
-//         if (err) {
-//             return res.status(403).json({
-//                 success: false,
-//                 message: 'Token is invalid'
-//             });
-//         }
-//         req.userId = user.id; 
-//         req.userFullName = user.fullName;
-//         next();
-//     });
-// };
-if (err) {
-    const log = {
-        userName: req.session?.user?.email || 'Anonymous',
-        sessionId: req.cookies['connect.sid'] || 'No session',
-        url: req.originalUrl,
-        method: req.method,
-    };
-    logger.error('Token is invalid', { meta: log });
-    return res.status(403).json({
-        success: false,
-        message: 'Token is invalid',
-    });
-}
+        if (err) {
+            const log = {
+                userName: req.session?.user?.email || 'Anonymous',
+                sessionId: req.cookies['connect.sid'] || 'No session',
+                url: req.originalUrl,
+                method: req.method,
+            };
+            logger.error('Token is invalid', { meta: log });
+            return res.status(403).json({
+                success: false,
+                message: 'Token is invalid',
+            });
+        }
 
-req.userId = user.id; // Ensure this matches your token payload
-req.userFullName = user.fullName;
-next();
-});
+        console.log("Eta haiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+        console.log(token)
+        console.log(req.userid), req.userFullName
+
+        req.userId = user.id;
+        req.userFullName = user.fullName;
+        next();
+    });
 };
 
 
@@ -80,7 +77,7 @@ const authGuardAdmin = (req, res, next) => {
     //         message
     //     });
     // }
-// ----
+    // ----
 
     const token = authHeader.split(' ')[1];
     if (!token) {
@@ -104,11 +101,11 @@ const authGuardAdmin = (req, res, next) => {
     //         message
     //     });
     // }
-// ----
+    // ----
     try {
         const decodedUser = jwt.verify(token, process.env.JWT_TOKEN_SECRET);
-        req.userId = decodedUser.id; // Assuming your JWT payload contains an `id` field
-        req.userFullName = decodedUser.fullName; // Assuming your JWT payload contains a `fullName` field
+        req.userId = decodedUser.id;
+        req.userFullName = decodedUser.fullName;
 
         if (!decodedUser.isAdmin) {
             return res.json({
@@ -132,23 +129,23 @@ const authGuardAdmin = (req, res, next) => {
         // }
         // ---
         next();
-    // }
-    //     catch (error) {
-    //         const message = "Invalid Token";
-    //         logger.error(message, { 
-    //             url: req.originalUrl,
-    //             method: req.method,
-    //             userName: req.session?.user?.userName,
-    //             sessionId: req.cookies ? req.cookies["connect.sid"] : 'N/A',
-    //             error: error.message
-    //         });
-    
-    //         res.json({
-    //             success: false,
-    //             message
-    //         });
-    //     }
-    // };
+        // }
+        //     catch (error) {
+        //         const message = "Invalid Token";
+        //         logger.error(message, { 
+        //             url: req.originalUrl,
+        //             method: req.method,
+        //             userName: req.session?.user?.userName,
+        //             sessionId: req.cookies ? req.cookies["connect.sid"] : 'N/A',
+        //             error: error.message
+        //         });
+
+        //         res.json({
+        //             success: false,
+        //             message
+        //         });
+        //     }
+        // };
     } catch (error) {
         res.json({
             success: false,
@@ -158,22 +155,22 @@ const authGuardAdmin = (req, res, next) => {
 };
 
 const auditLogger = (req, res, next) => {
-    
-        const userName =  req.session.user.email ;
-        
-        // Create the log object
-        const log = {
-            sessionId: req.cookies["connect.sid"] || 'No session',
-            url: req.originalUrl,
-            method: req.method,
-            userName: userName
-        };
-        console.log('Log data:', log);
-        logger.info('User activity', { meta: log });
+
+    const userName = req.session.user.email;
+
+    // Create the log object
+    const log = {
+        sessionId: req.cookies["connect.sid"] || 'No session',
+        url: req.originalUrl,
+        method: req.method,
+        userName: userName
+    };
+    console.log('Log data:', log);
+    logger.info('User activity', { meta: log });
     next();
 };
 
 
 
 
-module.exports = { authGuard, authGuardAdmin,auditLogger };
+module.exports = { authGuard, authGuardAdmin, auditLogger };

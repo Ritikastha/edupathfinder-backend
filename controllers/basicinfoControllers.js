@@ -1,14 +1,18 @@
 const { json, text } = require("express");
 const mongoose = require('mongoose');
 const Basicinfo = require('../model/basicModel');
+const Users = require("../model/userModel")
+const { ObjectId } = require('mongodb');
+
 
 const createBasicinfo = async (req, res) => {
     console.log(req.body);
-    console.log('User ID:', req.userId);  // Ensure this is correct
-    console.log('User Full Name:', req.userFullName);
+    console.log("oiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+    console.log('User ID:', req.body.userId);  // En
+    console.log('User Full name:', req.body.fullName);  // Ensure this is correct
 
     const { phone, age, level, gender, address, currentschool } = req.body;
-    const userId = req.userId;
+    const userId = req.body.userId;
 
     if (!phone || !age || !level || !gender || !address || !currentschool) {
         return res.json({
@@ -33,13 +37,19 @@ const createBasicinfo = async (req, res) => {
 
     try {
         // Check if Basicinfo already exists for this user
-        const existingBasicinfo = await Basicinfo.findOne({ user: userId }); //here
+        const existingBasicinfo = await Basicinfo.findOne({ _id: userId }); //here
         if (existingBasicinfo) {
             return res.status(400).json({
                 success: false,
                 message: "Basicinfo already exists for this user"
             });
         }
+
+        // console.log(typeof userId)
+
+
+        const user111 = await Users.findOne({ _id: userId });
+
 
         // Save basic info to database
         const newBasicinfo = new Basicinfo({
@@ -49,9 +59,8 @@ const createBasicinfo = async (req, res) => {
             gender,
             address,
             currentschool,
-            // here
-            userId: userId,
-            fullName: req.userFullName
+            user: user111._id,
+            fullName: req.body.fullName
         });
 
         await newBasicinfo.save();
@@ -88,7 +97,7 @@ const getAllBasicinfo = async (req, res) => {
         });
     }
 };
- 
+
 
 const getSingleBasicinfo = async (req, res) => {
     console.log('User ID:', req.userId);// Ensure that this is the correct property name
@@ -112,11 +121,27 @@ const getSingleBasicinfo = async (req, res) => {
         res.status(500).json("Server Error");
     }
 };
+
+const updateHai = (newObj, userId) => {
+
+
+
+
+}
+
+
 const updateBasicinfo = async (req, res) => {
     console.log('User ID:', req.userId);
-    const userId = req.userId; // Correctly access userId
+    const userId = req.body.userId; // Correctly access userId
 
     const { fullName, phone, age, level, gender, address, currentschool } = req.body;
+
+    console.log(req.body)
+
+
+    console.log('User ID:', req.body.userId);
+
+
 
     if (!fullName || !phone || !age || !level || !gender || !address || !currentschool) {
         return res.status(400).json({
@@ -125,33 +150,51 @@ const updateBasicinfo = async (req, res) => {
         });
     }
 
-    try {
-        const updatedBasicinfo = await Basicinfo.findOneAndUpdate(
-            { user: userId }, // Correct query to find by userId
-            { fullName, phone, age, level, gender, address, currentschool },
-            { new: true }
-        );
 
-        if (!updatedBasicinfo) {
-            return res.status(404).json({
-                success: false,
-                message: 'Basicinfo not found for this user'
-            });
-        }
+    console.log("bruh", userId)
 
-        res.json({
-            success: true,
-            message: 'Basicinfo updated successfully',
-            basicinfo: updatedBasicinfo
-        });
-    } catch (error) {
-        console.error('Error updating Basicinfo:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Server error'
-        });
-    }
+    // const user111 = await Users.findOne({ _id: userId });
+
+    // const newObj = {
+    //     fullName, phone, age, level, gender, address, currentschool, user: user111._id,
+    // }
+
+    Basicinfo.findOneAndUpdate(
+        { _id: userId },
+        { $set: req.body },
+        { new: true }
+    )
+    // console.log(newObj)
+
+    // await Basicinfo.findOneAndUpdate(
+    //     { _id: userId }, // Correct query to find by userId
+    //     { $set: newObj },
+    //     { new: true }
+    // );
+
+    // if (!updatedBasicinfo) {
+    //     return res.status(401).json({
+    //         success: false,
+    //         message: 'Basicinfo not found for this user'
+    //     });
+    // }
+
+    //    updateHai(newObj, userId);
+
+    res.json({
+        success: true,
+        message: 'Basicinfo updated successfully',
+        //basicinfo: updatedBasicinfo
+    });
+
+
+
+
+
 };
+
+
+
 
 module.exports = {
     createBasicinfo,

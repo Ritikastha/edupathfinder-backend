@@ -1,7 +1,7 @@
 const { json, text } = require("express");
 const cloudinary =require('cloudinary');
 const Addmission = require("../model/addmissionModel");
-const { encrypt, decrypt } = require('./encryptionUtils'); 
+const { encrypt, decrypt } = require('../utils/encryption'); 
 const createAddmission=async (req ,res)=>{
     console.log(req.body);
     

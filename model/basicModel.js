@@ -33,9 +33,8 @@ const basicinfoScheme = new mongoose.Schema({
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'Users',
         required: true,
-        unique: true  // Ensure this index is correct
     },
     fullName: {
         type: String,

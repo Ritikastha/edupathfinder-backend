@@ -189,6 +189,7 @@
 {"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-15T15:42:16.744Z"}
 {"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/school/get_school","userName":"anonymous"},"timestamp":"2024-08-15T15:42:16.802Z"}
 {"level":"info","message":"User activity","meta":{"method":"GET","sessionId":"No session","url":"/api/feature/get_feature","userName":"anonymous"},"timestamp":"2024-08-15T15:42:16.809Z"}
+
 {"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-11T03:56:51.356Z"}
 {"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-11T03:57:16.266Z"}
 {"level":"info","message":"Server is running on port 5000 ","timestamp":"2024-08-11T05:01:16.689Z"}
